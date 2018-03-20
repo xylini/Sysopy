@@ -1,0 +1,172 @@
+//
+// Created by Jakub Pajor on 11.03.2018.
+//
+#include <dlfcn.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <zconf.h>
+#include <sys/times.h>
+
+
+typedef struct Charray{
+    int length;
+    int block_length;
+    int block_sum;
+    char * char_block;
+}Charray;
+
+void *dl_handle;
+
+typedef void *(*arbitrary)();
+
+char* generateRandomString(int max_size) {
+    if (max_size < 1) return NULL;
+    char *base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    size_t dict_len = strlen(base);
+    char *res = (char *) malloc((max_size) * sizeof(char));
+
+    for (int i = 0; i < max_size-1; i++) {
+        res[i] = base[rand() % dict_len];
+    }
+    res[max_size-1] = '\0';
+
+    return res;
+}
+
+
+int chars_to_number(char * table_size){
+    int number = atoi(table_size);
+    if(number == 0 && table_size[0] != '0'){
+        fprintf(stderr,"chars_to_number: Given Charray/Block length is not number or sth went wrong.");
+        exit(EXIT_FAILURE);
+    }
+    return number;
+}
+
+
+int search_closest(Charray * charray, char * char_string){
+
+    arbitrary fsum_char_block;
+    *(void **) (&fsum_char_block) = dlsym(dl_handle, "sum_char_block");
+    int summ = fsum_char_block(char_string);
+
+    arbitrary fclosest_bsum_index;
+    *(void **) (&fclosest_bsum_index) = dlsym(dl_handle, "closest_bsum_index");
+    int closest = fclosest_bsum_index(charray,summ);
+    return closest;
+}
+
+
+Charray * create_and_delete(Charray * charray, int length, int times, int max_block_length, int is_static){
+    arbitrary fchange_char_block;
+    *(void **) (&fchange_char_block) = dlsym(dl_handle, "change_char_block");
+
+    for(int i = 0; i < times; i++){
+        for(int j = 0; j < length; j++){
+            char * string_to_give = generateRandomString(max_block_length);
+            charray = fchange_char_block(charray,j,string_to_give,is_static);
+            free(string_to_give);
+        }
+    }
+    return charray;
+}
+
+
+double calculate_time(clock_t start, clock_t end) {
+    return (double) (end - start) / sysconf(_SC_CLK_TCK);
+}
+
+
+Charray * create_charray_and_block(Charray * charray, int table_size, int block_max_size, int is_static){
+    arbitrary fcreate_char_array;
+    *(void **) (&fcreate_char_array) = dlsym(dl_handle, "create_char_array");
+
+    charray = fcreate_char_array(charray,table_size,is_static);
+
+    arbitrary fcreate_char_block;
+    *(void **) (&fcreate_char_block) = dlsym(dl_handle, "create_char_block");
+    for(int i = 0; i < table_size; i++){
+        char * string_to_give = generateRandomString(block_max_size);
+        fcreate_char_block(charray,i,string_to_give,is_static);
+        free(string_to_give);
+    }
+    return charray;
+}
+
+
+int main(int argc, char **argv) {
+
+    dl_handle = dlopen("./charray.so", RTLD_LAZY);
+    if (!dl_handle) {
+        printf("!!! %s\n", dlerror());
+        return 0;
+    }
+
+    srand((unsigned int)time(NULL));
+    if(argc < 4) {
+        printf("The arguments should be: "
+                       "\n\tis_static table_length block_length length_to_create_and_delete times_to_create_and_delete");
+        exit(EXIT_FAILURE);
+    }
+
+
+    int is_static = chars_to_number(argv[1]);
+    int table_size = chars_to_number(argv[2]);
+    int max_block_size = chars_to_number(argv[3]);
+    int length_to_del = chars_to_number(argv[4]);
+    int times_repeat = chars_to_number(argv[5]);
+    char * char_to_find_closest = generateRandomString(max_block_size);
+
+    struct tms **tms_time = malloc(8 * sizeof(struct tms *));
+    clock_t real_time[8];
+    for (int i = 0; i < 8; i++) {
+        tms_time[i] = (struct tms *) malloc(sizeof(struct tms *));
+    }
+
+    Charray * charray = NULL;
+    real_time[0] = times(tms_time[0]);
+    charray = create_charray_and_block(charray, table_size,max_block_size, is_static);
+    real_time[1] = times(tms_time[1]);
+
+
+    printf("Table creation: (%d == size) and block(%d == max_size)\n",table_size,max_block_size);
+    printf("real time: %lf   \n", calculate_time(real_time[0], real_time[1]));
+    printf("user time: %lf   \n", calculate_time(tms_time[0]->tms_utime, tms_time[1]->tms_utime));
+    printf("system time: %lf \n", calculate_time(tms_time[0]->tms_stime, tms_time[1]->tms_stime));
+    printf("\n");
+
+    real_time[2] = times(tms_time[2]);
+    search_closest(charray,char_to_find_closest);
+    real_time[3] = times((tms_time[3]));
+
+    printf("%s", "Searching: \n");
+    printf("real time: %lf   \n", calculate_time(real_time[2], real_time[3]));
+    printf("user time: %lf   \n", calculate_time(tms_time[2]->tms_utime, tms_time[3]->tms_utime));
+    printf("system time: %lf \n", calculate_time(tms_time[2]->tms_stime, tms_time[3]->tms_stime));
+    printf("\n");
+
+    real_time[4] = times(tms_time[4]);
+    create_and_delete(charray,length_to_del,1,max_block_size,is_static);
+    real_time[5] = times(tms_time[5]);
+
+    printf("Single create and delete (%d == length) \n",length_to_del);
+    printf("real time: %lf   \n", calculate_time(real_time[4], real_time[5]));
+    printf("user time: %lf   \n", calculate_time(tms_time[4]->tms_utime, tms_time[5]->tms_utime));
+    printf("system time: %lf \n", calculate_time(tms_time[4]->tms_stime, tms_time[5]->tms_stime));
+    printf("\n");
+
+    real_time[6] = times(tms_time[6]);
+    charray = create_and_delete(charray,length_to_del,times_repeat,max_block_size,is_static);
+    real_time[7] = times(tms_time[7]);
+
+    printf("Create and delete (%d == times, %d == length) \n",times_repeat,length_to_del);
+    printf("real time: %lf   \n", calculate_time(real_time[6], real_time[7]));
+    printf("user time: %lf   \n", calculate_time(tms_time[6]->tms_utime, tms_time[7]->tms_utime));
+    printf("system time: %lf \n", calculate_time(tms_time[6]->tms_stime, tms_time[7]->tms_stime));
+    printf("+------------------------------------+\n");
+
+
+    return 0;
+}

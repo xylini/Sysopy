@@ -1,0 +1,103 @@
+Testy dla sortowania:
+Ilosc rekordow: 800, rozmiar: 4
+Sorting time. Used library: sys
+real time: 2.410000   user time: 0.760000   system time: 1.610000 
+Sorting time. Used library: lib
+real time: 1.570000   user time: 0.810000   system time: 0.740000 
+
+
+Ilosc rekordow: 800, rozmiar: 512
+Sorting time. Used library: sys
+real time: 2.460000   user time: 0.770000   system time: 1.680000 
+Sorting time. Used library: lib
+real time: 3.410000   user time: 0.830000   system time: 2.560000 
+
+
+Ilosc rekordow: 800, rozmiar: 4096
+Sorting time. Used library: sys
+real time: 2.610000   user time: 0.760000   system time: 1.830000 
+Sorting time. Used library: lib
+real time: 3.500000   user time: 0.900000   system time: 2.590000 
+
+
+Ilosc rekordow: 800, rozmiar: 8192
+Sorting time. Used library: sys
+real time: 3.020000   user time: 0.800000   system time: 2.200000 
+Sorting time. Used library: lib
+real time: 3.590000   user time: 0.950000   system time: 2.630000 
+
+Ilosc rekordow: 1200, rozmiar: 4
+Sorting time. Used library: sys
+real time: 5.280000   user time: 1.710000   system time: 3.550000 
+Sorting time. Used library: lib
+real time: 3.610000   user time: 1.780000   system time: 1.810000 
+
+
+Ilosc rekordow: 1200, rozmiar: 512
+Sorting time. Used library: sys
+real time: 5.340000   user time: 1.710000   system time: 3.610000 
+Sorting time. Used library: lib
+real time: 7.830000   user time: 1.900000   system time: 5.870000 
+
+
+Ilosc rekordow: 1200, rozmiar: 4096
+Sorting time. Used library: sys
+real time: 5.770000   user time: 1.710000   system time: 4.040000 
+Sorting time. Used library: lib
+real time: 8.000000   user time: 2.040000   system time: 5.930000 
+
+
+Ilosc rekordow: 1200, rozmiar: 8192
+Sorting time. Used library: sys
+real time: 6.800000   user time: 1.800000   system time: 4.980000 
+Sorting time. Used library: lib
+real time: 8.690000   user time: 2.200000   system time: 6.460000 
+
+Plik 8192 rekordow x 8192 dlugosc
+Bufor: 4
+Copying time. Used library: sys
+real time: 110.330000   user time: 14.350000   system time: 95.100000 
+Copying time. Used library: lib
+real time: 1.860000   user time: 1.760000   system time: 0.050000 
+
+Bufor: 128
+Copying time. Used library: sys
+real time: 3.380000   user time: 0.440000   system time: 2.910000 
+Copying time. Used library: lib
+real time: 0.100000   user time: 0.050000   system time: 0.040000 
+
+Bufor: 512
+Copying time. Used library: sys
+real time: 0.920000   user time: 0.110000   system time: 0.790000 
+Copying time. Used library: lib
+real time: 0.070000   user time: 0.010000   system time: 0.040000 
+
+Bufor: 1024
+Copying time. Used library: sys
+real time: 0.450000   user time: 0.050000   system time: 0.390000 
+Copying time. Used library: lib
+real time: 0.050000   user time: 0.010000   system time: 0.040000 
+
+Bufor: 4096
+Copying time. Used library: sys
+real time: 0.150000   user time: 0.010000   system time: 0.130000 
+Copying time. Used library: lib
+real time: 0.040000   user time: 0.000000   system time: 0.040000 
+
+Bufor: 8192
+Copying time. Used library: sys
+real time: 0.090000   user time: 0.000000   system time: 0.080000 
+Copying time. Used library: lib
+real time: 0.040000   user time: 0.000000   system time: 0.030000 
+
+
+Podczas kopiowania lepsze czasy uzyskały funkcje biblioteczne
+Oraz im wiekszy był bufor tym szybciej dane zostały skopiowane.
+Dla bufora o rozmiarze 4 bajty czas dla funkcji systemowych
+Wyniósł 110 sekund oraz bardzo duży czas systemowy a dla 
+Bufory 8192 było to już 0.09 sekundy. Różnica kolosalna.
+Spowodowaną ilością razy dostępu do pliku.
+Również widać, że ogólnie przy używaniu funkcji systemowych 
+czas systemowy się wydłuża. Czasy sortowań niezależnie od biblioteki
+Były podobne a różnice mogły spowodować procesy działające w tle.
+Operacje które zostały przeprowadzone wykorzystywały takie same wygenerowane pliki.

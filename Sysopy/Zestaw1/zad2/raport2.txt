@@ -1,0 +1,245 @@
+TESTY DLA TABLICY DYNAMICZNEJ:
+Table creation: (1000 == size) and block(500 == max_size)
+real time: 0.010000   
+user time: 0.000000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (500 == length) 
+real time: 0.000000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (10 == times, 500 == length) 
+real time: 0.030000   
+user time: 0.030000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (5000 == size) and block(1000 == max_size)
+real time: 0.070000   
+user time: 0.060000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (300 == length) 
+real time: 0.000000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (13 == times, 300 == length) 
+real time: 0.050000   
+user time: 0.050000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (10000 == size) and block(10000 == max_size)
+real time: 1.360000   
+user time: 1.310000   
+system time: 0.030000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (3000 == length) 
+real time: 0.390000   
+user time: 0.380000   
+system time: 0.010000 
+
+Create and delete (3 == times, 3000 == length) 
+real time: 1.170000   
+user time: 1.150000   
+system time: 0.010000 
++------------------------------------+
+Table creation: (500 == size) and block(2000 == max_size)
+real time: 0.020000   
+user time: 0.010000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (300 == length) 
+real time: 0.000000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (20 == times, 300 == length) 
+real time: 0.160000   
+user time: 0.150000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (4000 == size) and block(20 == max_size)
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (3000 == length) 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Create and delete (20 == times, 3000 == length) 
+real time: 0.020000   
+user time: 0.020000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (300 == size) and block(8000 == max_size)
+real time: 0.040000   
+user time: 0.030000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (100 == length) 
+real time: 0.010000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (4 == times, 100 == length) 
+real time: 0.040000   
+user time: 0.040000   
+system time: 0.000000 
++------------------------------------+
+
+
+
+TESTY DLA TABLICY STATYCZNEJ:
+Table creation: (1024 == size) and block(512 == max_size)
+real time: 0.010000   
+user time: 0.000000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (512 == length) 
+real time: 0.010000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (12 == times, 512 == length) 
+real time: 0.040000   
+user time: 0.040000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (5000 == size) and block(1000 == max_size)
+real time: 0.090000   
+user time: 0.070000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (300 == length) 
+real time: 0.000000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (13 == times, 300 == length) 
+real time: 0.060000   
+user time: 0.050000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (9999 == size) and block(9999 == max_size)
+real time: 1.320000   
+user time: 1.260000   
+system time: 0.030000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (3000 == length) 
+real time: 0.360000   
+user time: 0.360000   
+system time: 0.000000 
+
+Create and delete (3 == times, 3000 == length) 
+real time: 1.140000   
+user time: 1.120000   
+system time: 0.010000 
++------------------------------------+
+Table creation: (500 == size) and block(2000 == max_size)
+real time: 0.020000   
+user time: 0.010000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (300 == length) 
+real time: 0.000000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (20 == times, 300 == length) 
+real time: 0.160000   
+user time: 0.150000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (4000 == size) and block(20 == max_size)
+real time: 0.010000   
+user time: 0.000000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (3000 == length) 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Create and delete (20 == times, 3000 == length) 
+real time: 0.030000   
+user time: 0.020000   
+system time: 0.000000 
++------------------------------------+
+Table creation: (300 == size) and block(8000 == max_size)
+real time: 0.040000   
+user time: 0.030000   
+system time: 0.000000 
+
+Searching: 
+real time: 0.000000   
+user time: 0.000000   
+system time: 0.000000 
+
+Single create and delete (100 == length) 
+real time: 0.010000   
+user time: 0.010000   
+system time: 0.000000 
+
+Create and delete (4 == times, 100 == length) 
+real time: 0.040000   
+user time: 0.040000   
+system time: 0.000000 
++------------------------------------+
