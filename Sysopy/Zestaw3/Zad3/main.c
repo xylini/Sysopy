@@ -1,13 +1,16 @@
 //
 // Created by Jakub Pajor on 25.03.2018.
 //
-
+#define _BSD_SOURCE         //must be on Ubuntu, Mac ok without
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <sys/wait.h>       //must be on Ubuntu, Mac ok without
+#include <memory.h>         //must be on Ubuntu, Mac ok without
+#include <sys/types.h>      //must be on Ubuntu, Mac ok without
 
 #define ARG_MAX_C 10
 #define ARG_MAX_L 255
