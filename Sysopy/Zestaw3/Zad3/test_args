@@ -1,4 +1,3 @@
+./data_limit_stress 100
+./cpu_limit_stress 4
 ls -l
-ls -l ..
-ls -l ../..
-cat test_args
