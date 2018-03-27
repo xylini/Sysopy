@@ -8,14 +8,13 @@
 #include <string.h>
 #include <sys/time.h>
 #include <sys/resource.h>
-#include <ulimit.h>
 
 #define ARG_MAX_C 10
 #define ARG_MAX_L 255
 
 void create_args(char * line, char * args_tab[ARG_MAX_L]){
     int i = 0;
-    while((args_tab[i++] = strtok(i == 0 ? line : NULL, " \n")) != NULL && i < ARG_MAX_L);
+    while((args_tab[i] = strtok(i == 0 ? line : NULL, " \n")) != NULL && i++ < ARG_MAX_L);
     while(i<ARG_MAX_C) args_tab[i++] = NULL;
 }
 
@@ -67,11 +66,6 @@ void run_programs(char * file_path, rlim_t cpu_limit, rlim_t mem_limit){
             setrlimit(RLIMIT_AS, &mem_limit_var);
             setrlimit(RLIMIT_CPU, &cpu_limit_var);
             
-            /*
-             struct rlimit memLimitData1;
-             getrlimit(RLIMIT_CPU, &memLimitData1);
-             printf("%d\n",memLimitData1.rlim_max);
-             */
             status = execvp(args_tab[0],args_tab);
             exit(EXIT_FAILURE);
         }
