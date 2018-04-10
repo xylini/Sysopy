@@ -9,9 +9,6 @@
 #include <unistd.h>
 #include <signal.h>
 
-#define _SIGRTMIN 32
-#define _SIGRTMAX 63
-
 int freeze = 1;
 
 void return_signal_handler(int signum){ freeze = 0; }
@@ -24,7 +21,7 @@ int main(int argc, char * argv[]){
 
     signal(SIGUSR2,return_signal_handler);
     while(freeze);
-    int random_signal = rand() % (_SIGRTMAX - _SIGRTMIN + 1) + _SIGRTMIN;
+    int random_signal = rand() % (SIGRTMAX - SIGRTMIN + 1) + SIGRTMIN;
     kill(getppid(),random_signal);
 
     return random_time;
