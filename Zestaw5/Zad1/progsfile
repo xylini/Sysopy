@@ -1,2 +1,0 @@
-ls -l | head -n 10 | tail -9 | head -n 7 | tail -2
-ls / | tail -6 | head -n 4 | tail -3
