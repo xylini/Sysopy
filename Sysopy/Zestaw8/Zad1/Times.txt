@@ -1,0 +1,4 @@
+Threads: 1, Filter: 20, Size: 640x480, Time [ms]: 1647378
+Threads: 2, Filter: 20, Size: 640x480, Time [ms]: 836288
+Threads: 4, Filter: 20, Size: 640x480, Time [ms]: 464673
+Threads: 8, Filter: 20, Size: 640x480, Time [ms]: 455779
